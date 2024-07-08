@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const messageSchema = new mongoose.Schema({
     text: {
         type: String,
-        default: ""
+        required: true
     },
     file: {
         type: String,
@@ -11,23 +11,9 @@ const messageSchema = new mongoose.Schema({
         validate: {
             validator: function(v) {
                 const fileTypes = [
-                    'pdf',
-                    'jpg',
-                    'png',
-                    'gif',
-                    'doc',
-                    'docx',
-                    'xls',
-                    'xlsx',
-                    'ppt',
-                    'pptx',
-                    'txt',
-                    'mp3',
-                    'mp4',
-                    'avi',
-                    'mkv',
-                    'zip',
-                    'rar'
+                    'pdf', 'jpg', 'png', 'gif', 'doc', 'docx',
+                    'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'mp3',
+                    'mp4', 'avi', 'mkv', 'zip', 'rar'
                 ];
                 return v === "" || fileTypes.includes(v.toLowerCase());
             },
@@ -39,14 +25,14 @@ const messageSchema = new mongoose.Schema({
         default: false
     },
     msgByUserId: {
-        type: mongoose.Schema.ObjectId,
-        required: true,
-        ref: 'User'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-    msgReceiver: {
-        type: mongoose.Schema.ObjectId,
-        required: true,
-        ref: 'User'
+    msgReciever: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
 }, {
     timestamps: true

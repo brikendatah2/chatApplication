@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-const friendListSchema = new mongoose.Schema({
-    user: { 
+const friendRequestSchema = new mongoose.Schema({
+    sender: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User', 
         required: true 
     },
-    friend: { 
+    recipient: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User', 
         required: true 
@@ -15,9 +15,12 @@ const friendListSchema = new mongoose.Schema({
         type: String, 
         enum: ['pending', 'accepted', 'rejected'], 
         default: 'pending' 
+    },
+    message: { 
+        type: String 
     }
 }, {
     timestamps: true
 });
 
-module.exports = mongoose.model('FriendList', friendListSchema);
+module.exports = mongoose.model('FriendRequest', friendRequestSchema);
