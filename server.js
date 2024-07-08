@@ -8,13 +8,15 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-const userRoutes = require('./routes/userRoutes');
-const groupRoutes = require('./Routes/groupRoutes');
+
+const userRoutes = require('./Routes/userRoutes');
 const messageRoutes = require('./Routes/MessageRoutes');
 const conversationRoutes = require('./Routes/conversationRoutes');
+const groupRoutes = require('./Routes/groupRoutes');
 const notificationRoutes = require('./Routes/notificationRoutes');
 const friendListRoutes = require('./Routes/friendListRoutes');
-
+const followListRoutes = require('./Routes/followListRoutes');
+const reportRoutes = require('./Routes/reportRoutes');
 
 const PORT = process.env.PORT || 3000;
 
@@ -28,12 +30,13 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/users', userRoutes);
-app.use('/api/groups', groupRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/conversations', conversationRoutes);
+app.use('/api/groups', groupRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/friendlist', friendListRoutes);
-
+app.use('/api/followlist', followListRoutes);
+app.use('/api/reports', reportRoutes);
 
 // Socket.io connection
 io.on('connection', socket => {
